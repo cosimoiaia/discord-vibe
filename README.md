@@ -1,9 +1,16 @@
-# Mistral Vibe
+# Mistral Vibe - Discord Edition
 
 [![PyPI Version](https://img.shields.io/pypi/v/mistral-vibe)](https://pypi.org/project/mistral-vibe)
 [![Python Version](https://img.shields.io/badge/python-3.12%2B-blue)](https://www.python.org/downloads/release/python-3120/)
-[![CI Status](https://github.com/mistralai/mistral-vibe/actions/workflows/ci.yml/badge.svg)](https://github.com/mistralai/mistral-vibe/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/mistralai/mistral-vibe)](https://github.com/mistralai/mistral-vibe/blob/main/LICENSE)
+
+> 🔗 **This is a fork of [Mistral Vibe](https://github.com/mistralai/mistral-vibe) that adds Discord integration**, allowing you to interact with the Vibe coding assistant directly through Discord channels.
+
+---
+
+# Mistral Vibe
+
+[![CI Status](https://github.com/cosimoiaia/discord-vibe/actions/workflows/ci.yml/badge.svg)](https://github.com/cosimoiaia/discord-vibe/actions/workflows/ci.yml)
 
 ```
 ██████████████████░░
@@ -59,6 +66,7 @@ pip install mistral-vibe
   - [Built-in Agents](#built-in-agents)
   - [Subagents and Task Delegation](#subagents-and-task-delegation)
   - [Interactive User Questions](#interactive-user-questions)
+- [🤖 Discord Integration (New!)](#-discord-integration-new)
 - [Terminal Requirements](#terminal-requirements)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
@@ -156,6 +164,49 @@ The `ask_user_question` tool allows the agent to ask you clarifying questions du
 ```
 
 The agent can ask multiple questions at once, displayed as tabs. Each question supports 2-4 options plus an automatic "Other" option for free text responses.
+
+## 🤖 Discord Integration (New!)
+
+This fork adds powerful Discord integration, allowing you to interact with Vibe directly through Discord channels!
+
+### Key Features
+
+- **Real-time Coding Assistance**: Get help with code analysis, writing, debugging in Discord
+- **Channel-Specific**: Configure Vibe to respond only in specific channels
+- **Conversation Context**: Maintains conversation history between messages
+- **Automatic Formatting**: Handles long responses by splitting into multiple messages
+- **Easy Setup**: Simple CLI arguments to connect to Discord
+
+### Quick Start
+
+```bash
+# Install Discord.py dependency
+pip install discord.py>=2.3.2
+
+# Create Discord bot and get token/channel ID
+# (See detailed setup in discord_integration/README.md)
+
+# Run Vibe on Discord
+vibe --discord-token "YOUR_BOT_TOKEN" --discord-channel CHANNEL_ID
+```
+
+### Example Usage
+
+```
+You: "Hello Vibe, can you help me write a Python function?"
+Vibe: "Hello! I'm Vibe, your coding assistant. I can help with Python..."
+
+You: "How do I implement quicksort?"
+Vibe: "Here's a Python implementation of quicksort with explanations..."
+```
+
+### Complete Documentation
+
+For detailed setup instructions, security best practices, and advanced usage, see:
+- [`discord_integration/README.md`](vibe/discord_integration/README.md) - Comprehensive guide
+- [`discord_integration/QUICKSTART.md`](vibe/discord_integration/QUICKSTART.md) - 5-minute setup
+
+---
 
 ## Terminal Requirements
 
