@@ -76,6 +76,19 @@ def parse_arguments() -> argparse.Namespace:
         help="Agent to use (builtin: default, plan, accept-edits, auto-approve, "
         "or custom from ~/.vibe/agents/NAME.toml)",
     )
+
+    # Discord integration
+    parser.add_argument(
+        "--discord-token",
+        type=str,
+        help="Discord bot token for Discord integration",
+    )
+    parser.add_argument(
+        "--discord-channel",
+        type=int,
+        help="Discord channel ID to monitor for messages",
+    )
+
     parser.add_argument("--setup", action="store_true", help="Setup API key and exit")
     parser.add_argument(
         "--workdir",
@@ -148,6 +161,35 @@ def main() -> None:
             )
             sys.exit(1)
         os.chdir(workdir)
+
+    # Check if Discord mode is requested
+    if args.discord_token and args.discord_channel:
+        from vibe.discord_integration.discord_bot import DiscordBot, DiscordHandler
+        from vibe.core.config import VibeConfig
+        
+        try:
+            config = VibeConfig.load()
+        except Exception as e:
+            rprint(f"[red]Failed to load config: {e}[/]")
+            sys.exit(1)
+        
+        handler = DiscordHandler(config)
+        bot = DiscordBot(
+            token=args.discord_token,
+            channel_id=args.discord_channel,
+            message_handler=handler.handle_message
+        )
+        
+        try:
+            asyncio.run(bot.start())
+        except KeyboardInterrupt:
+            rprint("\n[dim]Discord bot stopped[/]")
+            sys.exit(0)
+        except Exception as e:
+            rprint(f"[red]Discord bot error: {e}[/]")
+            sys.exit(1)
+        
+        return
 
     is_interactive = args.prompt is None
     if is_interactive:
