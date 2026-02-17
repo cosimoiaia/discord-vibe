@@ -6,6 +6,8 @@
 
 > 🔗 **This is a fork of [Mistral Vibe](https://github.com/mistralai/mistral-vibe) that adds Discord integration**, allowing you to interact with the Vibe coding assistant directly through Discord channels.
 
+🚀 **[Quick Start Guide](vibe/discord_integration/QUICKSTART.md)** - Get up and running in 5 minutes!
+
 ---
 
 # Mistral Vibe
